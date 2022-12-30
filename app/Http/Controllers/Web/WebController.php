@@ -41,6 +41,8 @@ class WebController extends AppBaseController
      */
     public function index()
     {
+
+        return redirect('/dashboard');
         $totalbeds = Bed::count();
         $totalDoctorNurses = Doctor::count() + Nurse::count();
         $totalPatient = Patient::count();
