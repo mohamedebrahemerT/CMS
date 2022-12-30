@@ -221,7 +221,10 @@
                                     </tbody>
                                 </table>
                             @else
-                                <h2 class="mb-0 text-center fs-2">No Notice Boards yet..</h2>
+                                <h2 class="mb-0 text-center fs-2">
+                                
+                                {{ __('messages.No Notice Boards yet..') }}
+                            </h2>
                             @endif
                         </div>
                     </div>
