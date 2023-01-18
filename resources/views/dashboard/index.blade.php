@@ -24,29 +24,15 @@
                                             <i class="fa-solid fa-money-check fs-1-xl text-white"></i>
                                         </div>
                                         <div class="text-end text-white">
-                                            <h2 class="fs-1-xxl fw-bolder text-white">{{getCurrencySymbol()}} {{ formatCurrency($data['invoiceAmount']) }}</h2>
+                                            <h2 class="fs-1-xxl fw-bolder text-white">{{getCurrencySymbol()}}
+                     {{ formatCurrency($data['invoiceAmount'] + $data['advancePaymentAmount'] - ($data['paymentAmount']) ) }}</h2>
                                             <h3 class="mb-0 fs-5 fw-light">{{ __('messages.dashboard.total_invoices') }}</h3>
                                         </div>
                                     </div>
                                 </a>
                             </div>
                         @endif
-                        @if($modules['Bills'])
-                            {{-- Bills Widget --}}
-                            <div class="col-xxl-3 col-xl-4 col-sm-6 widget">
-                                <a href="{{ route('bills.index') }}" class="text-decoration-none">
-                                    <div class="bg-success shadow-md rounded-10 p-xxl-10 px-5 py-10 d-flex align-items-center justify-content-between my-sm-3 my-2">
-                                        <div class="bg-green-300 widget-icon rounded-10 me-2  d-flex align-items-center justify-content-center">
-                                            <i class="fa-solid fa-money-bill fs-1-xl text-white"></i>
-                                        </div>
-                                        <div class="text-end text-white">
-                                            <h2 class="fs-1-xxl fw-bolder text-white">{{getCurrencySymbol()}} {{ formatCurrency($data['billAmount']) }}</h2>
-                                            <h3 class="mb-0 fs-5 fw-light">{{ __('messages.dashboard.total_bills') }}</h3>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        @endif
+                        
                         @if($modules['Payments'] == true)
                             {{-- Payments Widget --}}
                             <div class="col-xxl-3 col-xl-4 col-sm-6 widget">

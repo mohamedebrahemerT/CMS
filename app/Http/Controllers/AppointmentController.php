@@ -46,7 +46,7 @@ class AppointmentController extends AppBaseController
      */
     public function index()
     {
-        $statusArr = Appointment::STATUS_ARR;
+         $statusArr = Appointment::STATUS_ARR;
 
         return view('appointments.index', compact('statusArr'));
     }
@@ -96,6 +96,13 @@ class AppointmentController extends AppBaseController
     public function show(Appointment $appointment)
     {
         return view('appointments.show')->with('appointment', $appointment);
+    }
+
+
+    public function print ($id)
+    {
+        $row= appointment::where('id',$id)->first();
+        return view('appointments.print')->with('row', $row);
     }
 
     /**

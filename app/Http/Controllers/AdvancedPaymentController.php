@@ -95,6 +95,15 @@ class AdvancedPaymentController extends AppBaseController
         return $this->sendResponse($advancedPayment, 'Advance Payment retrieved successfully.');
     }
 
+    public function print($id)
+    {
+
+         $AdvancedPayment=AdvancedPayment::where('id',$id)->first();
+        return view('advanced_payments.print', compact( 'AdvancedPayment'));
+
+        
+    }
+
     /**
      * @param  AdvancedPayment  $advancedPayment
      * @param  UpdateAdvancedPaymentRequest  $request

@@ -35,8 +35,11 @@
                 <div class="form-group mb-5">
                     {{ Form::label('hospital_phone',__('messages.setting.hospital_phone').':', ['class' => 'form-label']) }}
                     <br>
-                    {{ Form::tel('hospital_phone',  $settings['hospital_phone'], ['class' => 'form-control phoneNumber','id' => 'generalPhoneNumber', 'onkeyup' => 'if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,"")', 'required']) }}
-                    {{ Form::hidden('prefix_code',null,['class'=>'prefix_code']) }}
+
+   {{ Form::text('hospital_phone',  $settings['hospital_phone'], ['class' => 'form-control','required']) }}
+
+                    
+                    
                     <span class="text-success valid-msg d-none fw-400 fs-small mt-2">✓ &nbsp; {{__('messages.valid')}}</span>
                     <span class="text-danger error-msg d-none fw-400 fs-small mt-2"></span>
                 </div>

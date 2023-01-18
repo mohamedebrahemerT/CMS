@@ -1,3 +1,13 @@
+<style type="text/css">
+      @media (min-width: 992px)
+{
+    .ms-lg-auto {
+  margin-right: auto !important;
+}
+}
+</style>
+
+
 <div class="row">
     <div class="col-xxl-8">
         <div class="row">
@@ -6,7 +16,13 @@
                     <div class="image image-circle image-small">
                         <img alt="Logo" src="{{ getLogoUrl() }}" height="100px" width="100px">
                     </div>
-                    <h3 class="ps-7">Invoice #{{ $invoice->invoice_id }}</h3>
+                    <h3 class="ps-7">  {{ getAppName() }}
+
+<br>
+   {{ ($hospitalAddress=="") ? __('messages.common.n/a') : $hospitalAddress }}
+                    </h3>
+                    
+                      
                 </div>
             </div>
             <div class="col-lg-4 col-md-3 col-6">
@@ -24,7 +40,7 @@
             </div>
             <div class="col-lg-5 col-md-6">
                 <div class="d-flex flex-column mb-md-10 mb-5">
-                    <label for="name" class="pb-2 fs-5 text-gray-600">Issue For:</label>
+                    <label for="name" class="pb-2 fs-5 text-gray-600"> فاتوره الي :</label>
                     <span class="fs-5 text-gray-800 mb-3">{{ $invoice->patient->patientUser->full_name }}</span>
                     <p class="text-gray-700 fs-5 mb-0">
                     @if(isset($invoice->patient->address) && !empty($invoice->patient->address))
@@ -36,10 +52,13 @@
             </div>
             <div class="col-md-2 col-md-6">
                 <div class="d-flex flex-column mb-md-10 mb-5">
-                    <label for="name" class="pb-2 fs-5 text-gray-600">Issue For:</label>
-                    <span class="fs-5 text-gray-800 mb-3">{{ getAppName() }}</span>
-                    <p class="text-gray-700 fs-5 mb-0">
-                    {{ ($hospitalAddress=="") ? __('messages.common.n/a') : $hospitalAddress }}
+                    
+                    <span class="fs-5 text-gray-800 mb-3">
+                   
+
+                     <h3 class="ps-7"> رقم  الفاتوره  : {{ $invoice->id }}</h3>
+                </span>
+                  
                 </div>
             </div>
 
@@ -47,7 +66,7 @@
                 <table class="table table-striped box-shadow-none mt-4">
                     <thead>
                     <tr class="border-bottom fs-6  text-muted">
-                        <th class="pb-2">{{ __('messages.account.account') }}</th>
+                        
                         <th class="pb-2">{{ __('messages.invoice.description') }}</th>
                         <th class="text-end pb-2">{{ __('messages.invoice.qty') }}</th>
                         <th class="text-end pb-2">{{ __('messages.invoice.price') }}</th>
@@ -57,8 +76,8 @@
                     <tbody>
                     @foreach($invoice->invoiceItems as $index => $invoiceItem)
                         <tr class="text-end">
-                            <td class="pt-6 text-start">{{ $invoiceItem->account->name }}</td>
-                            <td class="pt-6 text-start">{!! ($invoiceItem->description != '')?nl2br(e($invoiceItem->description)):'N/A' !!}</td>
+                            
+                            <td class="pt-6 text-start" style="float: right;">{!! ($invoiceItem->description != '')?nl2br(e($invoiceItem->description)):'N/A' !!}</td>
                             <td class="pt-6">{{ $invoiceItem->quantity }}</td>
                             <td class="pt-6"><b>{{ getCurrencySymbol() }}</b> {{ number_format($invoiceItem->price) }}
                             </td>
@@ -69,6 +88,8 @@
                     </tbody>
                 </table>
             </div>
+             <div class="col-lg-5 ms-lg-auto mt-4">
+             </div>
             <div class="col-lg-5 ms-lg-auto mt-4">
                 <div class="border-top">
                     <table class="table table-borderless {{ getLoggedInUser()->thememode ? '' : 'bg-white' }} box-shadow-none mb-0 mt-5">
@@ -91,30 +112,5 @@
             </div>
         </div>
     </div>
-    <div class="col-xxl-4">
-        <div class="bg-light-100 rounded-15 p-md-7 p-5 h-100 mt-xxl-0 mt-5 col-xxl-9 ms-xxl-auto">
-            <div class="mb-8">
-                @if($invoice->status == \App\Models\Invoice::PENDING)
-                    <span class="badge bg-light-warning">Pending Payment</span>
-                @elseif($invoice->status == \App\Models\Invoice::PAID)
-                    <span class="badge bg-light-success me-2">Paid</span>
-                @endif
-            </div>
-            <h6 class="mb-5">PATIENT OVERVIEW</h6>
-            <div class="mb-6">
-                <div class="pb-2 fs-5 text-gray-600 fs-7">{{ __('messages.death_report.patient_name') }}</div>
-                <div class="fs-5 text-gray-900">
-                    <a href="{{ route('patients.show', ['patient' => $invoice->patient->id]) }}"
-                       class="link-primary fs-5 text-decoration-none">{{ $invoice->patient->patientUser->full_name }}</a></div>
-            </div>
-            <div class="mb-6">
-                <div class="pb-2 fs-5 text-gray-600 fs-7">{{ __('messages.bill.patient_email') }}</div>
-                <div class="fs-5 text-gray-900">{{ $invoice->patient->patientUser->email }}</div>
-            </div>
-            <div class="mb-6">
-                <div class="pb-2 fs-5 text-gray-600">{{ __('messages.bill.patient_gender') }}</div>
-                <div class="fs-5 text-gray-900">{{ $invoice->patient->patientUser->gender == 1 ? __('messages.user.female'): __('messages.user.male') }}</div>
-            </div>
-        </div>
-    </div>
+    
 </div>

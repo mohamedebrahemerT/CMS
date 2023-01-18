@@ -61,13 +61,20 @@ class AppointmentTable extends LivewireTableComponent
             Column::make(__('messages.case.patient'), "patient.patientUser.email")
                 ->hideIf('patient.patientUser.email')
                 ->searchable(),
+
+
+
             Column::make(__('messages.case.patient'), "doctor.doctorUser.email")
                 ->hideIf('doctor.doctorUser.email')
                 ->searchable(),
-            Column::make(__('messages.case.patient'), "patient.patientUser.first_name")
+
+        
+
+                    Column::make(__('messages.case.patient'), "patient.patientUser.first_name")
                 ->view('appointments.templates.columns.patient_name')
                 ->sortable()
                 ->searchable(),
+
             Column::make(__('messages.case.doctor'), "doctor.doctorUser.first_name")
                 ->view('appointments.templates.columns.doctor_name')
                 ->sortable()

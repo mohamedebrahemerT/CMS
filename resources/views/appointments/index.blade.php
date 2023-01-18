@@ -4,10 +4,17 @@
 @endsection
 @section('content')
     @include('flash::message')
+
     <div class="container-fluid">
+
+        
+
         {{ Form::hidden('appointmentUrl', url('appointments'), ['class' => 'appointmentURL']) }}
+
         {{ Form::hidden('patientUrl', url('patients'), ['class' => 'patientAppointmentURL']) }}
+
         {{ Form::hidden('doctorUrl', url('doctors'), ['class' => 'doctorAppointmentURL']) }}
+        
         {{ Form::hidden('doctorShowUrl', url('employee/doctor'), ['class' => 'doctorShowURL']) }}
         {{ Form::hidden('patientRole', Auth::user()->hasRole('Patient')?true:false, ['class' => 'patientRole']) }}
         {{ Form::hidden('doctorRole', Auth::user()->hasRole('Doctor')?false:true, ['class' => 'doctorRole']) }}

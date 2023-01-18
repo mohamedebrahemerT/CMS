@@ -50,16 +50,19 @@ class Invoice extends Model
 {
     public const PENDING = 1;
     public const PAID = 0;
-    public const STATUS_ALL = 2;
+    public const VISA = 2;
+    public const STATUS_ALL = 3;
     public const STATUS_ARR = [
         self::STATUS_ALL => 'All',
-        self::PENDING    => 'Pending',
-        self::PAID       => 'Paid',
+        self::PENDING    => 'اجل ',
+        self::PAID       => 'نقدي ',
+        self::VISA       => 'فيزا ',
     ];
     public const FILTER_STATUS_ARR = [
         2 => 'All',
         0 => 'Paid',
         1 => 'Pending',
+        3 => 'VISA',
     ];
     /**
      * Validation rules

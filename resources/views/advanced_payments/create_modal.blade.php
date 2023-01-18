@@ -17,9 +17,9 @@
                         {{ Form::select('patient_id', $patients, null, ['class' => 'form-select', 'id' => 'advancePaymentPatientId','placeholder' => 'Select Patient', 'required','data-control' => 'select2']) }}
                     </div>
                     <div class="form-group col-sm-12 mb-5">
-                        {{ Form::label('receipt_no', __('messages.advanced_payment.receipt_no').(':'),['class' => 'form-label']) }}
+                        {{ Form::label('desc', __('messages.advanced_payment.desc').(':'),['class' => 'form-label']) }}
                         <span class="required"></span>
-                        {{ Form::text('receipt_no', null, ['class' => 'form-control','required','readonly','id'=>'receiptNoId']) }}
+                        {{ Form::text('receipt_no', null, ['class' => 'form-control','required' ]) }}
                     </div>
                     <div class="form-group col-sm-12 mb-5">
                         {{ Form::label('amount', __('messages.advanced_payment.amount').(':'),['class' => 'form-label']) }}

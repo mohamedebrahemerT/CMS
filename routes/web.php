@@ -245,7 +245,12 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
     });
 
     Route::group(['middleware' => ['role:Admin|Patient|Doctor|Receptionist|Nurse']], function () {
+
+
         Route::resource('appointments', 'AppointmentController');
+
+Route::get('appointments/print/{id}', 'AppointmentController@print');
+
         Route::get('appointments', 'AppointmentController@index')->name('appointments.index')->middleware('modules');
         Route::post('appointments/{appointment}', 'AppointmentController@update');
         Route::get('doctors-list', 'AppointmentController@getDoctors');
@@ -837,10 +842,19 @@ Route::group(['middleware' => ['auth', 'verified', 'xss', 'checkUserStatus']], f
             'advanced-payments',
             'AdvancedPaymentController'
         )->parameters(['advanced-payments' => 'advancedPayment']);
+
+
         Route::get(
             'advanced-payments',
             'AdvancedPaymentController@index'
         )->name('advanced-payments.index')->middleware('modules');
+
+
+  Route::get(
+            'advanced-payments/print/{id}',
+            'AdvancedPaymentController@print'
+        );
+
 
         // Inventory Management routes.
         Route::resource('item-categories', 'ItemCategoryController')->parameters(['item-categories' => 'itemCategory']);

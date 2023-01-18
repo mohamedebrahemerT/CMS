@@ -570,6 +570,7 @@ function divider($numberOfDigits)
  */
 function preparePhoneNumber($input, $key)
 {
+    return $input[$key]  ;
     return (!empty($input[$key])) ? '+'.$input['prefix_code'].$input[$key] : null;
 }
 

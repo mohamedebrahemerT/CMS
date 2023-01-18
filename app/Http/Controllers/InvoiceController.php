@@ -54,7 +54,7 @@ class InvoiceController extends AppBaseController
      */
     public function create()
     {
-        $data = $this->invoiceRepository->getSyncList();
+         $data = $this->invoiceRepository->getSyncList();
 
         return view('invoices.create')->with($data);
     }
@@ -70,9 +70,12 @@ class InvoiceController extends AppBaseController
      */
     public function store(CreateInvoiceRequest $request)
     {
+
         try {
             DB::beginTransaction();
             $bill = $this->invoiceRepository->saveInvoice($request->all());
+
+           
             $this->invoiceRepository->saveNotification($request->all());
             DB::commit();
         } catch (Exception $e) {

@@ -78,7 +78,7 @@ class DoctorTable extends LivewireTableComponent
             Column::make(__('messages.doctor.specialist'), "specialist")
                 ->searchable()
                 ->sortable(),
-            $qualification,
+         
             Column::make(__('messages.common.status'), "doctorUser.status")
                 ->view('doctors.templates.columns.status'),
             $actionBtn,

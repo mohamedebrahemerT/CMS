@@ -54,7 +54,7 @@ class DoctorRepository extends BaseRepository
         try {
             $input['phone'] = preparePhoneNumber($input, 'phone');
             $input['department_id'] = Department::whereName('Doctor')->first()->id;
-            $input['password'] = Hash::make($input['password']);
+            //$input['password'] = Hash::make($input['password']);
             $input['dob'] = (! empty($input['dob'])) ? $input['dob'] : null;
             $user = User::create(Arr::except($input, ['specialist', 'doctor_department_id']));
             if ($mail) 

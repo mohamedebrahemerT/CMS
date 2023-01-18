@@ -7,13 +7,7 @@
             {{ Form::text('first_name', null, ['class' => 'form-control', 'required', 'tabindex' => '1']) }}
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="form-group mb-5">
-            {{ Form::label('last_name', __('messages.user.last_name').':', ['class' => 'form-label']) }}
-            <span class="required"></span>
-            {{ Form::text('last_name', null, ['class' => 'form-control', 'required', 'tabindex' => '2']) }}
-        </div>
-    </div>
+    
     <div class="col-md-6">
         <div class="form-group mb-5">
             {{ Form::label('email', __('messages.user.email').':', ['class' => 'form-label']) }}

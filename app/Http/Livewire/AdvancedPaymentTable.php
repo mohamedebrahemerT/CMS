@@ -72,6 +72,7 @@ class AdvancedPaymentTable extends LivewireTableComponent
                 ->view('advanced_payments.columns.advanced_payment_amount')
                 ->sortable()
                 ->searchable(),
+                
             Column::make(__('messages.common.action'), "id")
                 ->view('advanced_payments.action'),
         ];

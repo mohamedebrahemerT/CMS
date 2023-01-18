@@ -87,14 +87,14 @@ class Doctor extends Model
      */
     public static $rules = [
         'first_name'    => 'required',
-        'last_name'     => 'required',
+        'last_name'     => 'nullable',
         'email'         => 'required|email:filter|unique:users,email',
         'password'      => 'nullable|same:password_confirmation|min:6',
-        'designation'   => 'required',
+        'designation'   => 'nullable',
         'gender'        => 'required',
-        'qualification' => 'required',
+        'qualification' => 'nullable',
         'dob'           => 'nullable|date',
-        'specialist'    => 'required',
+        'specialist'    => 'nullable',
     ];
 
     /**

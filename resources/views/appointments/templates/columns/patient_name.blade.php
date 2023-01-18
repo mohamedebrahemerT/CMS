@@ -11,5 +11,6 @@
         <a href="{{route('patients.show',$row->patient->id)}}"
            class="mb-1 text-decoration-none">{{$row->patient->patientUser->full_name}}</a>
         <span>{{$row->patient->patientUser->email}}</span>
+        <span>رقم  الحجز :{{$row->id}}</span>
     </div>
 </div>

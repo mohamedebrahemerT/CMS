@@ -28,3 +28,8 @@
 </a>
 <?php }?>
 
+<a title="{{__('messages.common.print')}}" href="{{url('/')}}/appointments/print/{{ $row->id }}" data-id="{{ $row->id }}"
+   class="btn px-1 text-primary fs-3 ps-0 advance-payment-print-btn">
+    <i class="fa fa-print"></i>
+</a>
+
