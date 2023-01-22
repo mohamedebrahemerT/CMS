@@ -464,21 +464,21 @@ function formatCurrency($currencyValue)
         if ($amountValue < 900000) {
             // 0.9k-850k
             $numberFormat = number_format($amountValue / 1000, $precision);
-            $suffix = 'K';
+            $suffix = ' ';
         } else {
             if ($amountValue < 900000000) {
                 // 0.9m-850m
                 $numberFormat = number_format($amountValue / 1000000, $precision);
-                $suffix = 'M';
+                $suffix = ' ';
             } else {
                 if ($amountValue < 900000000000) {
                     // 0.9b-850b
                     $numberFormat = number_format($amountValue / 1000000000, $precision);
-                    $suffix = 'B';
+                    $suffix = ' ';
                 } else {
                     // 0.9t+
                     $numberFormat = number_format($amountValue / 1000000000000, $precision);
-                    $suffix = 'T';
+                    $suffix = ' ';
                 }
             }
         }

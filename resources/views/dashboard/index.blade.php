@@ -24,7 +24,7 @@
                                             <i class="fa-solid fa-money-check fs-1-xl text-white"></i>
                                         </div>
                                         <div class="text-end text-white">
-                                            <h2 class="fs-1-xxl fw-bolder text-white"> 
+                                            <h2 class="fs-1-xxl fw-bolder text-white">{{getCurrencySymbol()}}
                      {{ formatCurrency($data['invoiceAmount'] + $data['advancePaymentAmount'] - ($data['paymentAmount']) ) }}</h2>
                                             <h3 class="mb-0 fs-5 fw-light">{{ __('messages.dashboard.total_invoices') }}</h3>
                                         </div>
