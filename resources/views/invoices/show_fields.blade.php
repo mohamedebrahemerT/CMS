@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="col-md-3 col-6">
-                <a target="_blank" href="{{ route('invoices.pdf',['invoice' => $invoice->id]) }}"
+                <a target="_blank" href="{{url('/')}}/invoices/print/{{$invoice->id}}"
                    class="btn btn-success text-white">
                     {{ __('messages.invoice.print_invoice') }}
                 </a>

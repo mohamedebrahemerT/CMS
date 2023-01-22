@@ -566,6 +566,10 @@ Route::get('appointments/print/{id}', 'AppointmentController@print');
             ->name('employee-payrolls.edit');
 
         Route::resource('invoices', 'InvoiceController')->parameters(['invoices' => 'invoice']);
+
+         Route::get('invoices/print/{id}', 'InvoiceController@print');
+
+
         Route::get('invoices', 'InvoiceController@index')->name('invoices.index')->middleware('modules');
         Route::post('invoices/{invoice}', 'InvoiceController@update');
         Route::get('invoices/{invoice}/pdf', 'InvoiceController@convertToPdf')->name('invoices.pdf');

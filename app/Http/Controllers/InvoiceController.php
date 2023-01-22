@@ -42,7 +42,7 @@ class InvoiceController extends AppBaseController
      */
     public function index()
     {
-        $statusArr = Invoice::STATUS_ARR;
+         $statusArr = Invoice::STATUS_ARR;
 
         return view('invoices.index')->with('statusArr', $statusArr);
     }
@@ -173,5 +173,12 @@ class InvoiceController extends AppBaseController
         $pdf = PDF::loadView('invoices.invoice_pdf', $data);
 
         return $pdf->stream('invoice.pdf');
+    }
+
+    public function print($id)
+    {
+        $Invoice= Invoice::where('id',$id)->first();
+        return view('invoices.print',compact('Invoice'));
+        
     }
 }

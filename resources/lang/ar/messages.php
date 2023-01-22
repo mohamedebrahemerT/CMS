@@ -197,7 +197,7 @@ return [
 
     //common keys
     'common'   => [
-        'print'                                       => 'طباه ',
+        'print'                                       => 'طباعه ',
         'status2'                                       => ' طريقة  الدفع   ',
         'profile'                                       => 'الملف الشخصي',
         'status'                                        => 'الحالة',
