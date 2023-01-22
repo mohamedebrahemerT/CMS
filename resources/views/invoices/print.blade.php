@@ -202,7 +202,7 @@ padding: 13px;">
            
          <div style="width: 50%;float: left;margin-left: -7%;">
 {{ getAppName() }} <br>
-                            <img style="margin-top:10px;" src="{{ getLogoUrl() }}"   />    
+                            <img style="width: 68px;margin-top:10px;" src="{{ getLogoUrl() }}"   />    
                          
          </div>
             
