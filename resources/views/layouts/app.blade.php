@@ -146,7 +146,27 @@
     })();
 </script>
 
-
+    
+    <script type="text/javascript">
+  $(function () {
+    
+    var table = $('.data-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ url('/')}}/withdraw",
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+          
+            {data: 'amount', name: 'amount'},
+            {data: 'date', name: 'date'},
+            {data: 'time', name: 'time'},
+             
+        ]
+    });
+    
+  });
+</script>
+   
 </div>
 </body>
 </html>

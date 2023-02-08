@@ -66,6 +66,7 @@
                 <table class="table table-striped box-shadow-none mt-4">
                     <thead>
                     <tr class="border-bottom fs-6  text-muted">
+                        <th class="pb-2">{{ __('messages.item.item') }}</th>
                         
                         <th class="pb-2">{{ __('messages.invoice.description') }}</th>
                         <th class="text-end pb-2">{{ __('messages.invoice.qty') }}</th>
@@ -76,7 +77,9 @@
                     <tbody>
                     @foreach($invoice->invoiceItems as $index => $invoiceItem)
                         <tr class="text-end">
-                            
+
+                              <td class="pt-6 text-start">{{ $invoiceItem->account->name }}</td>
+
                             <td class="pt-6 text-start" style="float: right;">{!! ($invoiceItem->description != '')?nl2br(e($invoiceItem->description)):'N/A' !!}</td>
                             <td class="pt-6">{{ $invoiceItem->quantity }}</td>
                             <td class="pt-6"><b>{{ getCurrencySymbol() }}</b> {{ number_format($invoiceItem->price) }}

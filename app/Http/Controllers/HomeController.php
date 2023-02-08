@@ -20,6 +20,8 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+use App\Models\treasury;
+
 class HomeController extends AppBaseController
 {
     private $dashboardRepository;
@@ -53,7 +55,29 @@ class HomeController extends AppBaseController
                 
 
 //        $data['invoiceAmount'] = Invoice::sum('amount');
-        $data['invoiceAmount'] = totalAmount();
+         $data['invoiceAmount'] = totalAmount();
+
+      if (treasury::count() == 0) 
+      {
+         $treasury= treasury::create([
+            'sub'=>$data['invoiceAmount'],
+            'main'=>'0',
+          ]);
+      }
+      else
+      {
+       $treasury= treasury::first();
+       $treasury->sub= $data['invoiceAmount'];
+       $treasury->save();
+
+
+       $treasury->diff= $treasury->sub - $treasury->main;
+       $treasury->save();
+
+
+      }
+
+
         $data['billAmount'] = Bill::sum('amount');
         $data['paymentAmount'] = Payment::sum('amount');
         $data['advancePaymentAmount'] = AdvancedPayment::sum('amount');
@@ -66,7 +90,11 @@ class HomeController extends AppBaseController
         $data['currency'] = Setting::CURRENCIES;
         $modules = Module::pluck('is_active', 'name')->toArray();
 
-        return view('dashboard.index', compact('data', 'modules'));
+        $sub= $data['invoiceAmount'] + $data['advancePaymentAmount'] - ($data['paymentAmount']) - $treasury->main  ;
+            $sub= number_format($sub,2);
+
+
+        return view('dashboard.index', compact('data', 'modules','treasury','sub'));
     }
 
     /**

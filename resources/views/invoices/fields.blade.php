@@ -55,16 +55,16 @@
             </div>
         </div>
 
-        <!--div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-end">
+        <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-end">
             <button type="button" class="btn btn-primary text-star addInvoiceItem" id="addInvoiceItem"> {{ __('messages.invoice.add') }}</button>
-        </div -->
+        </div >
 
         <div class="table-responsive">
             <table class="table g-5 gs-0 mt-2" id="billTbl">
                 <thead>
                 <tr class="border-bottom fs-7 text-gray-700 text-uppercase">
                     <th class="text-center">#</th>
-                    <!--th>{{ __('messages.account.account') }}</th-->
+                    <th>{{ __('messages.item.item') }}</th>
                     <th>{{ __('messages.invoice.description') }}</th>
                     <th>{{ __('messages.invoice.qty') }}<span class="required"></span></th>
                     <th>{{ __('messages.invoice.price') }}<span class="required"></span></th>
@@ -83,7 +83,7 @@
                             <td class="table__item-desc">
                                 {{ Form::select('account_id[]', $accounts, $invoiceItem->account_id, ['class' => 'form-select accountId', 'required', 'placeholder'=>'Select Account', 'data-control' => 'select2']) }}
                                 {{ Form::hidden('id[]', $invoiceItem->id) }}
-                            </td>
+                            </td >
                             <td class="text-center">
                                 {{ Form::text('description[]', $invoiceItem->description, ['class' => 'form-control']) }}
                             </td>
@@ -108,10 +108,10 @@
                 @else
                     <tr class="border-bottom border-bottom-dashed">
                         <td class="text-center pt-5 item-number">1</td>
-                        <!--td class="table__item-desc">
+                          <td class="table__item-desc">
                             {{ Form::select('account_id[]', $accounts, null, ['class' => 'form-select accountId ','required','placeholder'=>'Select Account','data-control' => 'select2']) }}
-                        </td -->
-                        <input type="hidden" name="account_id[]" value="{{App\Models\Account::first()->id}}">
+                        </td>
+                        
                         <td>
                             {{ Form::text('description[]', null, ['class' => 'form-control']) }}
                         </td>

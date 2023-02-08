@@ -240,6 +240,7 @@ padding: 13px;">
    <table style="  border: 1px solid black !important; ">
        <thead>
                     <tr class="border-bottom fs-6  text-muted">
+                        <th class="pb-2">{{ __('messages.item.item') }}</th>
                         
                         <th class="pb-2">{{ __('messages.invoice.description') }}</th>
                         <th class="text-end pb-2">{{ __('messages.invoice.qty') }}</th>
@@ -254,7 +255,7 @@ padding: 13px;">
                    
                   @foreach($Invoice->invoiceItems as $index => $invoiceItem)
                         <tr  >
-                            
+                              <td style="  border: 1px solid black !important;">{{ $invoiceItem->account->name }}</td>
                             <td style="  border: 1px solid black !important;">{!! ($invoiceItem->description != '')?nl2br(e($invoiceItem->description)):'N/A' !!}</td>
                             <td style="  border: 1px solid black !important;">{{ $invoiceItem->quantity }}</td>
                             <td style="  border: 1px solid black !important;"><b>{{ getCurrencySymbol() }}</b> {{ number_format($invoiceItem->price) }}

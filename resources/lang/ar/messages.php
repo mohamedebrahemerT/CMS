@@ -465,6 +465,7 @@ return [
         'print_invoice'    => 'طباعة الفاتورة',
         'pending'    => '   اجل  ',
         'Paid'    => '     نقدي  ',
+        'new_withdraw'    => 'سحب  جديد ',
     ],
 
     //nurses
@@ -889,7 +890,8 @@ return [
 
     'dashboard' => [
         'dashboard'                  => 'لوحة القيادة',
-        'total_invoices'             => ' الخزنه  الرئيسية ',
+        'total_invoices'             => 'الخزنه الفرعية  ',
+        'total_invoices_main'             => ' الخزينة الرئيسية ',
         'total_bills'                => 'إجمالي مبلغ الفاتورة',
         'total_payments'             => ' اجمالي  المصاريف ',
         'total_advance_payments'     => ' اجمالي  دفعات السداد ',

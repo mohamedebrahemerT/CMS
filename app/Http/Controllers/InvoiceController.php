@@ -20,6 +20,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 use Throwable;
+use App\Models\treasury;
+use App\Models\withdraw;
 
 class InvoiceController extends AppBaseController
 {
@@ -54,7 +56,7 @@ class InvoiceController extends AppBaseController
      */
     public function create()
     {
-         $data = $this->invoiceRepository->getSyncList();
+          $data = $this->invoiceRepository->getSyncList();
 
         return view('invoices.create')->with($data);
     }
@@ -70,15 +72,20 @@ class InvoiceController extends AppBaseController
      */
     public function store(CreateInvoiceRequest $request)
     {
-
-        try {
-            DB::beginTransaction();
-            $bill = $this->invoiceRepository->saveInvoice($request->all());
-
            
+        
+
+        try 
+        {
+            DB::beginTransaction();
+             $bill = $this->invoiceRepository->saveInvoice($request->all());
+
+             
+
             $this->invoiceRepository->saveNotification($request->all());
             DB::commit();
-        } catch (Exception $e) {
+        } catch (Exception $e) 
+        {
             DB::rollBack();
 
             return $this->sendError($e->getMessage());
@@ -97,7 +104,7 @@ class InvoiceController extends AppBaseController
     public function show(Invoice $invoice)
     {
         $data['hospitalAddress'] = Setting::where('key', '=', 'hospital_address')->first()->value;
-        $data['invoice'] = Invoice::with(['invoiceItems.account', 'patient.address'])->find($invoice->id);
+         $data['invoice'] = Invoice::with(['invoiceItems.account', 'patient.address'])->find($invoice->id);
 
         return view('invoices.show')->with($data);
     }
@@ -180,5 +187,61 @@ class InvoiceController extends AppBaseController
         $Invoice= Invoice::where('id',$id)->first();
         return view('invoices.print',compact('Invoice'));
         
+    }
+    public function withdraw(Request $request)
+    {
+
+       $main= withdraw::sum('amount');
+
+      $treasury= treasury::first();
+      $treasury->main= $main;
+      $treasury->save();
+
+
+          if ($request->ajax()) {
+            $data = withdraw::latest()->get();
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                   
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+        return view('invoices.withdraw');
+       
+        
+    }
+
+    public function createwithdraw(  )
+    {
+
+        return view('invoices.createwithdraw');
+
+       
+    }
+
+    public function withdrawstore()
+    {
+
+      $treasury= treasury::first();
+      
+
+        if ( $treasury->diff == 0) 
+        {
+              session()->flash('danger','رصيد  الخزنة  الفرعية  لا يسمح ');
+
+            return back();
+           
+        }
+      $withdraw=   withdraw::create([
+            'amount'=>request('amount'),
+            'date'=>date('Y-m-d'),
+            'time'=>date('h:m:s'),
+         ]);
+
+ 
+        session()->flash('success', 'تم  السحب  بنجاح ');
+
+        return Redirect('/withdraw');
     }
 }

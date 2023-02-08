@@ -12,6 +12,7 @@ use App\Models\Patient;
 use App\Models\Receptionist;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Item;
 use Arr;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Validator;
@@ -56,7 +57,9 @@ class InvoiceRepository extends BaseRepository
     public function getSyncList()
     {
         $invoiceRepo = app(BillRepository::class);
-        $data['accounts'] = Account::whereStatus(1)->orderBy('name', 'asc')->pluck('name', 'id');
+
+        $data['accounts'] = Item::orderBy('name', 'asc')->pluck('name', 'id');
+
         $data['associateAccounts'] = $this->getAssociateAccountList();
         $data['patients'] = $invoiceRepo->getPatientList();
         $invoiceStatusArr = Invoice::STATUS_ARR;
@@ -71,7 +74,7 @@ class InvoiceRepository extends BaseRepository
      */
     public function getAssociateAccountList()
     {
-        $result = Account::whereStatus(1)->orderBy('name', 'asc')->pluck('name', 'id')->toArray();
+        $result = Item:: orderBy('name', 'asc')->pluck('name', 'id')->toArray();
         $accounts = [];
         foreach ($result as $key => $item) {
             $accounts[] = [
@@ -90,16 +93,22 @@ class InvoiceRepository extends BaseRepository
      */
     public function saveInvoice($input)
     {
-        $invoiceItemInputArray = Arr::only($input, ['account_id', 'description', 'quantity', 'price']);
+
+   $invoiceItemInputArray = Arr::only($input, ['account_id', 'description', 'quantity', 'price']);
         $invoiceExist = Invoice::where('invoice_id', $input['invoice_id'])->exists();
-        if($invoiceExist){
+        if($invoiceExist)
+        {
             throw new UnprocessableEntityHttpException('Invoice id already exist');
             return false;
         }
 //        $input['invoice_id'] = Invoice::generateUniqueInvoiceId();
         /** @var Invoice $invoice */
+
         $invoice = $this->create(Arr::only($input, ['patient_id', 'invoice_date', 'discount', 'status', 'invoice_id']));
+
         $totalAmount = 0;
+
+          
 
         $invoiceItemInput = $this->prepareInputForInvoiceItem($invoiceItemInputArray);
         foreach ($invoiceItemInput as $key => $data) {
@@ -118,6 +127,11 @@ class InvoiceRepository extends BaseRepository
         }
         $invoice->amount = $totalAmount;
         $invoice->save();
+
+       $Item= Item::where('id',$input['account_id'])->first();
+
+       $Item->available_quantity=$Item->available_quantity -$data['quantity'];
+       $Item->save();
 
         return $invoice;
     }
@@ -145,7 +159,7 @@ class InvoiceRepository extends BaseRepository
 
     public function updateInvoice($invoiceId, $input)
     {
-        $invoiceItemInputArr = Arr::only($input, ['account_id', 'description', 'quantity', 'price', 'id']);
+    return    $invoiceItemInputArr = Arr::only($input, ['account_id', 'description', 'quantity', 'price', 'id']);
 
         /** @var Invoice $invoice */
         $invoice = $this->update(Arr::only($input, ['patient_id', 'invoice_date', 'discount', 'status']), $invoiceId);
@@ -157,7 +171,8 @@ class InvoiceRepository extends BaseRepository
                 'account_id.integer' => 'Please select an account',
             ]);
 
-            if ($validator->fails()) {
+            if ($validator->fails()) 
+            {
                 throw new UnprocessableEntityHttpException($validator->errors()->first());
             }
 

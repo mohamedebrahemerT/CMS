@@ -567,6 +567,11 @@ Route::get('appointments/print/{id}', 'AppointmentController@print');
 
         Route::resource('invoices', 'InvoiceController')->parameters(['invoices' => 'invoice']);
 
+
+        Route::get('withdraw', 'InvoiceController@withdraw');
+        Route::get('withdraw/create', 'InvoiceController@createwithdraw');
+        Route::post('withdrawstore', 'InvoiceController@withdrawstore');
+
          Route::get('invoices/print/{id}', 'InvoiceController@print');
 
 
